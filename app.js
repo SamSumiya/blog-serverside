@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/api/v1/', router);
 app.use('/auth', authRouter);
-app.use('/blogs', blogRouter);
+app.use('/api/v1/blogs', blogRouter);
 
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : null;
 
