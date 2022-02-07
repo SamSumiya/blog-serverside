@@ -5,9 +5,13 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session)
+
 
 const router = require('./routes/index');
 const authRouter = require('./routes/auth');
+
 // load config and put all the global variables here
 dotenv.config({ path: './config/config.env' });
 
@@ -33,8 +37,10 @@ app.use(
     secret: 'crazy cats!',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
+
 
 //Passport
 app.use(passport.initialize());

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "cross-env NODE_ENV=development nodemon app.js", 
-    "start": "cross-env NODE_ENV=production app.js" 
+    "devStart": "cross-env NODE_ENV=development nodemon app.js",
+    "start": "cross-env NODE_ENV=production app.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "connect-mongo": "^4.6.0", 
+    "connect-mongo": "^3.2.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",

@@ -7,6 +7,7 @@ const get_loginPage = (req, res) => {
 }
 
 const get_dashboard = (req, res) => {
+  console.log(req.user);
   res.render('dashboard.hbs');
 };
 
