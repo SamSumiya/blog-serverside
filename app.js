@@ -6,12 +6,11 @@ const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session)
-
+const MongoStore = require('connect-mongo')(session);
 
 const router = require('./routes/index');
 const authRouter = require('./routes/auth');
-const blogRouter = require('./routes/blog')
+const blogRouter = require('./routes/blog');
 
 // load config and put all the global variables here
 dotenv.config({ path: './config/config.env' });
@@ -25,12 +24,23 @@ const connctDB = require('./db/connectDB');
 const app = express();
 
 app.use(morgan('dev'));
-app.use(express.json())
-app.use(express.urlencoded({extended: false})) 
-// Hanler bars
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// # Hanlerbars helper
+
+const { formatDate } = require('./helpers/hbs');
+
+// Hanlerbars
 app.engine(
   '.hbs',
-  exphbs.engine({ defaultLayout: 'main.hbs', extname: '.hbs' })
+  exphbs.engine({
+    helpers: {
+      formatDate,
+    },
+    defaultLayout: 'main.hbs',
+    extname: '.hbs',
+  })
 );
 app.set('view engine', '.hbs');
 
@@ -40,10 +50,9 @@ app.use(
     secret: 'crazy cats!',
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-
 
 //Passport
 app.use(passport.initialize());
