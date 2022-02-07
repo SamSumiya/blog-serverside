@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // # Hanlerbars helper
 
-const { formatDate } = require('./helpers/hbs');
+const { formatDate, truncate, stripTags, editIcon } = require('./helpers/hbs');
 
 // Hanlerbars
 app.engine(
@@ -37,6 +37,9 @@ app.engine(
   exphbs.engine({
     helpers: {
       formatDate,
+      truncate,
+      stripTags,
+      editIcon,
     },
     defaultLayout: 'main.hbs',
     extname: '.hbs',
@@ -57,6 +60,13 @@ app.use(
 //Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global variable 
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null 
+  next() 
+}) 
+
 // Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
