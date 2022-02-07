@@ -3,11 +3,15 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const path = require('path')
 const exphbs = require('express-handlebars')
-
+const passport = require('passport')
+const session = require('express-session')
 
 const router = require('./routes/index')
 // load config and put all the global variables here
 dotenv.config({ path: './config/config.env' });
+
+require('./config/passport')(passport) 
+
 const PORT = process.env.PORT || 5050;
 
 const connctDB = require('./db/connectDB');
@@ -22,6 +26,16 @@ app.use(morgan('dev'))
 app.engine('.hbs', exphbs.engine({defaultLayout: 'main.hbs',  extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
+// Sessions
+app.use(session({
+  secret: 'crazy cats!', 
+  resave: false, 
+  saveUninitialized: false
+}))
+
+//Passport 
+app.use(passport.initialize())
+app.use(passport.session())
 // Static Folder
 app.use(express.static(path.join(__dirname, 'public')))
 
