@@ -1,0 +1,39 @@
+{
+  "name": "bookshelf-em",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "cross-env NODE_ENV=development nodemon app.js", 
+    "start": "cross-env NODE_ENV=production app.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamSumiya/bookshelf-em.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamSumiya/bookshelf-em/issues"
+  },
+  "homepage": "https://github.com/SamSumiya/bookshelf-em#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "connect-mongo": "^4.6.0", 
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.0",
+    "morgan": "^1.10.0",
+    "passport": "^0.5.2",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}
