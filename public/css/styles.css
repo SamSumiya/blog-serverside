@@ -9,3 +9,8 @@
   margin-top: 60px;
   text-align: center;
 }
+
+
+.fa-small {
+  font-size: 13px !important; 
+}
