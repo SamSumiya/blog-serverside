@@ -1,7 +1,9 @@
 
 
 const get_loginPage = (req, res) => {
-  res.render('login.hbs') 
+  res.render('login.hbs', {
+    layout: 'login'
+  }) 
 }
 
 const get_dashboard = (req, res) => {

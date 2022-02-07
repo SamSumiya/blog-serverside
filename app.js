@@ -19,7 +19,7 @@ const app = express();
 
 app.use(morgan('dev'))
 // Hanler bars 
-app.engine('.hbs', exphbs.engine({ extname: '.hbs' }));
+app.engine('.hbs', exphbs.engine({defaultLayout: 'main.hbs',  extname: '.hbs' }));
 app.set('view engine', '.hbs');
 // app.set('views', '.hbs');
 
