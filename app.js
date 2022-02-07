@@ -21,7 +21,6 @@ app.use(morgan('dev'))
 // Hanler bars 
 app.engine('.hbs', exphbs.engine({defaultLayout: 'main.hbs',  extname: '.hbs' }));
 app.set('view engine', '.hbs');
-// app.set('views', '.hbs');
 
 // Static Folder
 app.use(express.static(path.join(__dirname, 'public')))
