@@ -23,7 +23,7 @@ router.get('/google/callback',
 // @Desc Logout User
 router.get('/logout', (req, res) => {
   req.logout() 
-  res.redirect('/api/v1/')
+  res.redirect('/api/v1/login');
 })
 
 module.exports = router;
