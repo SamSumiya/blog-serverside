@@ -25,6 +25,8 @@ const connctDB = require('./db/connectDB');
 const app = express();
 
 app.use(morgan('dev'));
+app.use(express.json())
+app.use(express.urlencoded({extended: false})) 
 // Hanler bars
 app.engine(
   '.hbs',

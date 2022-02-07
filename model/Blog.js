@@ -11,18 +11,18 @@ const BlogSchema = new mongoose.Schema({
     required: true,
   },
   status: {
-    type: String, 
-    default: 'public', 
-    enum: ['public', 'private']
-  }, 
+    type: String,
+    default: 'public',
+    enum: ['public', 'private'],
+  },
   user: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   createdAt: {
-    type: Date, 
-    default: Date.now, 
-  }
+    type: Date,
+    default: new Date().toLocaleString(),
+  },
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);
