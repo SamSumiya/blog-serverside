@@ -18,6 +18,8 @@
     <title>Blog</title>
   </head>
   <body>
+    {{> _header}}
+    {{> _add_button}}
     <div class='container'>
       {{{body}}}
     </div>
@@ -25,5 +27,15 @@
     <script
       src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.17.1/ckeditor.js" integrity="sha512-VXEKi5eNc7ECuyIueuledlqeUWiJ7hcxBe9fnsCiVzeZ0XwJxAPemnq01/LBIBnp3i0szhvKNd9Us7fqNPsRmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+      M.Sidenav.init(document.querySelectorAll('.sidenav'));
+      M.FormSelect.init(document.querySelectorAll('#status'));
+
+      CKEDITOR.replace('body', {
+        plugins: 'wysiwygarea,  toolbar, basicstyles, link' 
+      }); 
+    </script>
   </body>
 </html>

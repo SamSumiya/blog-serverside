@@ -1,1 +1,30 @@
-<h1>Dashboard</h1>
+<h5>Dashboard</h5>
+
+<h3>Welcome {{name}}</h3>
+<p>Here are your blogs</p>
+
+
+{{#if blogs}}
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each blogs}}
+        <tr>
+          <td><a href="/blogs{{_id}}">{{title}}</a></td>
+          <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+          <td><span class="dash-status">{{status}}</span></td>
+          <td></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>You have not create any blog...</p>
+{{/if}}
