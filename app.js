@@ -7,6 +7,7 @@ const passport = require('passport')
 const session = require('express-session')
 
 const router = require('./routes/index')
+const authRouter = require('./routes/auth')
 // load config and put all the global variables here
 dotenv.config({ path: './config/config.env' });
 
@@ -15,8 +16,6 @@ require('./config/passport')(passport)
 const PORT = process.env.PORT || 5050;
 
 const connctDB = require('./db/connectDB');
-
-
 
 const app = express();
 
@@ -41,11 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes 
 app.use('/api/v1', router);
-
-
+app.use('/auth', authRouter);
 
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : null 
-
 
 
 async function start() {
