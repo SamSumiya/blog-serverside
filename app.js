@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo')(session)
 
 const router = require('./routes/index');
 const authRouter = require('./routes/auth');
+const blogRouter = require('./routes/blog')
 
 // load config and put all the global variables here
 dotenv.config({ path: './config/config.env' });
@@ -51,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/api/v1/', router);
 app.use('/auth', authRouter);
+app.use('/blogs', blogRouter);
 
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : null;
 
