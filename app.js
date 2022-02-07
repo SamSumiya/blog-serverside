@@ -1,7 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const { engine } = require('express-handlebars')
+const path = require('path')
+const exphbs = require('express-handlebars')
 
 
 const router = require('./routes/index')
@@ -15,10 +16,15 @@ const connctDB = require('./db/connectDB');
 
 const app = express();
 
-// Hanler bars 
-app.engine('.hbs', engine({ defaultLayout: 'main', extnames: '.hbs' }));
-app.set('view engine', '.hbs');
 
+app.use(morgan('dev'))
+// Hanler bars 
+app.engine('.hbs', exphbs.engine({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
+// app.set('views', '.hbs');
+
+// Static Folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes 
 app.use('/api/v1', router);
