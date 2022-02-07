@@ -1,11 +1,11 @@
 
 
 const get_loginPage = (req, res) => {
-  res.send('login page') 
+  res.render('login.hbs', {layout: false}) 
 }
 
 const get_dashboard = (req, res) => {
-  res.send('dashboard page');
+  res.render('dashboard.hbs', { layout: false });
 };
 
 
