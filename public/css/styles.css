@@ -13,3 +13,8 @@
 .fa- {
   font-size: 13px !important;
 }
+
+.btn-float {
+  float: left; 
+  margin-right: 10px;
+}

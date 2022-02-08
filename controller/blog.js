@@ -53,7 +53,7 @@ const getEditPage = async (req, res) => {
 
 const editBlog = async (req, res) => {
   let blog = await Blog.findById(req.params.id).lean();
-  
+
   if (!blog) {
     return res.render('error/404');
   }
@@ -62,15 +62,34 @@ const editBlog = async (req, res) => {
   } else {
     try {
       blog = await Blog.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true, 
-        runValidators: true, 
+        new: true,
+        runValidators: true,
       });
-      res.redirect('/api/v1/dashboard')
+      res.redirect('/api/v1/dashboard');
     } catch (error) {
       console.error(error);
       return res.render('error/404');
     }
   }
+};
+
+const deleteBlog = async (req, res) => {
+ 
+  // try {
+  //     if (blog.user.toString() !== req.user.id) {
+  //     res.redirect('/api/v1/blogs');
+  //   } else {
+      try {
+        const msg = await Blog.findOneAndDelete({ _id: req.params.id });
+        res.redirect('/api/v1/dashboard');
+      } catch (error) {
+        console.error(error);
+        return res.render('error/500');
+      }
+    // }
+  // } catch (error) {
+  //   return res.render('error/404')
+  // }
 };
 
 module.exports = {
@@ -79,4 +98,5 @@ module.exports = {
   getAllBlogs,
   getEditPage,
   editBlog,
+  deleteBlog,
 };

@@ -8,6 +8,7 @@ const {
   getAllBlogs,
   getEditPage,
   editBlog,
+  deleteBlog,
 } = require('../controller/blog');
 
 // #Desc Get /blogs/add
@@ -20,5 +21,7 @@ router.get('/', ensureAuth, getAllBlogs);
 router.get('/edit/:id', ensureAuth, getEditPage);
 
 router.put('/:id', ensureAuth, editBlog);
+
+router.delete('/:id', ensureAuth, deleteBlog);
 
 module.exports = router;
