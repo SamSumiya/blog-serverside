@@ -29,7 +29,13 @@ app.use(express.urlencoded({ extended: false }));
 
 // # Hanlerbars helper
 
-const { formatDate, truncate, stripTags, editIcon } = require('./helpers/hbs');
+const {
+  formatDate,
+  truncate,
+  stripTags,
+  editIcon,
+  select,
+} = require('./helpers/hbs');
 
 // Hanlerbars
 app.engine(
@@ -40,6 +46,7 @@ app.engine(
       truncate,
       stripTags,
       editIcon,
+      select,
     },
     defaultLayout: 'main.hbs',
     extname: '.hbs',

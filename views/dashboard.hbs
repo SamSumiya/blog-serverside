@@ -17,7 +17,7 @@
     <tbody>
       {{#each blogs}}
         <tr>
-          <td><a href="/blogs{{_id}}">{{title}}</a></td>
+          <td><a href="/api/v1/blogs{{_id}}">{{title}}</a></td>
           <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
           <td><span class="dash-status">{{status}}</span></td>
           <td></td>

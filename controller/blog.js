@@ -43,7 +43,7 @@ const getEditPage = async (req, res) => {
   } 
 
   if (blog.user.toString() !== req.user.id) {
-    res.redirect('/api/v1/blogs');
+    res.redirect('/blogs');
   } else {
     res.render('blog/edit', {
       blog,
