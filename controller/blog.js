@@ -31,6 +31,22 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
+const getSingleBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id).populate('user').lean();
+
+    if (!blog) {
+      return res.render('error/404');
+    }
+
+    res.render('blog/show', {
+      blog,
+    });
+  } catch (error) {
+    res.render('error/404');
+  }
+};
+
 const getEditPage = async (req, res) => {
   console.log(req.params);
 
@@ -87,6 +103,7 @@ module.exports = {
   getBlogs,
   addBlog,
   getAllBlogs,
+  getSingleBlog,
   getEditPage,
   editBlog,
   deleteBlog,
