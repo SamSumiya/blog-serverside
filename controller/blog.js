@@ -67,6 +67,22 @@ const getEditPage = async (req, res) => {
   }
 };
 
+const getUserBlogs = async (req, res) => {
+  try {
+    const blogs = await Blog.find({
+      user: req.params.userId,
+      status: 'public',
+    })
+      .populate('user')
+      .lean();
+    res.render('blog/index', {
+      blogs
+    })
+  } catch (error) {
+    res.render('error/500')
+  }
+};
+
 const editBlog = async (req, res) => {
   let blog = await Blog.findById(req.params.id).lean();
 
@@ -107,4 +123,5 @@ module.exports = {
   getEditPage,
   editBlog,
   deleteBlog,
+  getUserBlogs,
 };
