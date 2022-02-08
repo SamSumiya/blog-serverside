@@ -53,7 +53,7 @@ const getEditPage = async (req, res) => {
 
 const editBlog = async (req, res) => {
   let blog = await Blog.findById(req.params.id).lean();
-
+  
   if (!blog) {
     return res.render('error/404');
   }
