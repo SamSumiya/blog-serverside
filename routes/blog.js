@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const { ensureAuth } = require('../middleware/auth');
-const { getBlogs, addBlog, getAllBlogs } = require('../controller/blog');
+const {
+  getBlogs,
+  addBlog,
+  getAllBlogs,
+  getEditPage,
+} = require('../controller/blog');
 
 // #Desc Get /blogs/add
 router.get('/add', ensureAuth, getBlogs);
@@ -10,5 +15,8 @@ router.get('/add', ensureAuth, getBlogs);
 router.post('/', ensureAuth, addBlog);
 
 router.get('/', ensureAuth, getAllBlogs)
+
+router.get('/edit/:id', ensureAuth, getEditPage)
+
 
 module.exports = router;

@@ -31,8 +31,29 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
+const getEditPage = async (req, res) => {
+  console.log(req.params)
+
+  const blog = await Blog.findOne({
+    _id: req.params.id, 
+  }).lean() 
+  console.log(blog.user.toString(), req.user.id, 'ddsdfsdfsdfdsfa');
+  if (!blog) {
+    return res.render('error/404')
+  } 
+
+  if (blog.user.toString() !== req.user.id) {
+    res.redirect('/api/v1/blogs');
+  } else {
+    res.render('blog/edit', {
+      blog,
+    });
+  }
+}
+
 module.exports = {
   getBlogs,
   addBlog,
   getAllBlogs,
+  getEditPage,
 };
