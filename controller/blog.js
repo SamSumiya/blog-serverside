@@ -31,6 +31,22 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
+const getSingleBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id).populate('user').lean();
+
+    if (!blog) {
+      return res.render('error/404');
+    }
+
+    res.render('blog/show', {
+      blog,
+    });
+  } catch (error) {
+    res.render('error/404');
+  }
+};
+
 const getEditPage = async (req, res) => {
   console.log(req.params);
 
@@ -48,6 +64,22 @@ const getEditPage = async (req, res) => {
     res.render('blog/edit', {
       blog,
     });
+  }
+};
+
+const getUserBlogs = async (req, res) => {
+  try {
+    const blogs = await Blog.find({
+      user: req.params.userId,
+      status: 'public',
+    })
+      .populate('user')
+      .lean();
+    res.render('blog/index', {
+      blogs
+    })
+  } catch (error) {
+    res.render('error/500')
   }
 };
 
@@ -74,29 +106,22 @@ const editBlog = async (req, res) => {
 };
 
 const deleteBlog = async (req, res) => {
- 
-  // try {
-  //     if (blog.user.toString() !== req.user.id) {
-  //     res.redirect('/api/v1/blogs');
-  //   } else {
-      try {
-        const msg = await Blog.findOneAndDelete({ _id: req.params.id });
-        res.redirect('/api/v1/dashboard');
-      } catch (error) {
-        console.error(error);
-        return res.render('error/500');
-      }
-    // }
-  // } catch (error) {
-  //   return res.render('error/404')
-  // }
+  try {
+    const msg = await Blog.findOneAndDelete({ _id: req.params.id });
+    res.redirect('/api/v1/dashboard');
+  } catch (error) {
+    console.error(error);
+    return res.render('error/500');
+  }
 };
 
 module.exports = {
   getBlogs,
   addBlog,
   getAllBlogs,
+  getSingleBlog,
   getEditPage,
   editBlog,
   deleteBlog,
+  getUserBlogs,
 };

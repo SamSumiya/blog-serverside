@@ -16,14 +16,14 @@
     <tbody>
       {{#each blogs}}
         <tr>
-          <td><a href='/api/v1/blogs/{{blog._id}}'>{{title}}</a></td>
+          <td><a href='/api/v1/blogs/{{_id}}'>{{title}}</a></td>
           <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
           <td><span class='dash-status'>{{status}}</span></td>
           <td>
             <a href='/api/v1/blogs/edit/{{_id}}' class='btn btn-float'>
               <i class='fas fa-edit fa-small'></i></a>
             <form
-              action='/api/v1/blogs/{{_id}}'
+              action='/api/v1/blogs/{{blog._id}}'
               method='POST'
               id='delete-form'
             >
