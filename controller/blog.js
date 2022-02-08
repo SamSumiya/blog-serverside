@@ -74,22 +74,13 @@ const editBlog = async (req, res) => {
 };
 
 const deleteBlog = async (req, res) => {
- 
-  // try {
-  //     if (blog.user.toString() !== req.user.id) {
-  //     res.redirect('/api/v1/blogs');
-  //   } else {
-      try {
-        const msg = await Blog.findOneAndDelete({ _id: req.params.id });
-        res.redirect('/api/v1/dashboard');
-      } catch (error) {
-        console.error(error);
-        return res.render('error/500');
-      }
-    // }
-  // } catch (error) {
-  //   return res.render('error/404')
-  // }
+  try {
+    const msg = await Blog.findOneAndDelete({ _id: req.params.id });
+    res.redirect('/api/v1/dashboard');
+  } catch (error) {
+    console.error(error);
+    return res.render('error/500');
+  }
 };
 
 module.exports = {
