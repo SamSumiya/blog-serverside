@@ -10,7 +10,11 @@
   text-align: center;
 }
 
+.fa- {
+  font-size: 13px !important;
+}
 
-.fa-small {
-  font-size: 13px !important; 
+.btn-float {
+  float: left; 
+  margin-right: 10px;
 }

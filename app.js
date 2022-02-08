@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+const methodOverride = require('method-override')
 
 const router = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -27,9 +28,23 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// # Hanlerbars helper
+// Method Override
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    let method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
 
-const { formatDate, truncate, stripTags, editIcon } = require('./helpers/hbs');
+// # Hanlerbars helper
+const {
+  formatDate,
+  truncate,
+  stripTags,
+  editIcon,
+  select,
+} = require('./helpers/hbs');
 
 // Hanlerbars
 app.engine(
@@ -40,6 +55,7 @@ app.engine(
       truncate,
       stripTags,
       editIcon,
+      select,
     },
     defaultLayout: 'main.hbs',
     extname: '.hbs',
