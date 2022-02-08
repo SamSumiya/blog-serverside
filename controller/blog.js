@@ -32,15 +32,15 @@ const getAllBlogs = async (req, res) => {
 };
 
 const getEditPage = async (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
 
   const blog = await Blog.findOne({
-    _id: req.params.id, 
-  }).lean() 
-  console.log(blog.user.toString(), req.user.id, 'ddsdfsdfsdfdsfa');
+    _id: req.params.id,
+  }).lean();
   if (!blog) {
-    return res.render('error/404')
-  } 
+    console.error(error);
+    return res.render('error/404');
+  }
 
   if (blog.user.toString() !== req.user.id) {
     res.redirect('/blogs');
@@ -49,11 +49,34 @@ const getEditPage = async (req, res) => {
       blog,
     });
   }
-}
+};
+
+const editBlog = async (req, res) => {
+  let blog = await Blog.findById(req.params.id).lean();
+
+  if (!blog) {
+    return res.render('error/404');
+  }
+  if (blog.user.toString() !== req.user.id) {
+    res.redirect('/blogs');
+  } else {
+    try {
+      blog = await Blog.findOneAndUpdate({ _id: req.params.id }, req.body, {
+        new: true, 
+        runValidators: true, 
+      });
+      res.redirect('/api/v1/dashboard')
+    } catch (error) {
+      console.error(error);
+      return res.render('error/404');
+    }
+  }
+};
 
 module.exports = {
   getBlogs,
   addBlog,
   getAllBlogs,
   getEditPage,
+  editBlog,
 };

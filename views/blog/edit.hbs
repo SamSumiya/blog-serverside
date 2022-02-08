@@ -1,6 +1,7 @@
 <h2>Edit</h2>
 <div class="row">
-  <form action="/api/v1/blogs" method="POST" class="col s12">
+  <form action="/api/v1/blogs/{{blog._id}}" method="POST" class="col s12">
+  <input type="hidden" name="_method", value="PUT">
     <div class="row">
       <div class="input-field">
         <input type="text" id="title" name="title" value="{{blog.title}}">
